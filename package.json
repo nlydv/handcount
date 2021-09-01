@@ -1,0 +1,15 @@
+{
+  "name": "handcount",
+  "version": "0.1.0",
+  "description": "Tool to handle/export Handshake tx history from the wallet client (hsw) & exchanges (only Bittrex currently) for portfolio tracking purposes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Neel Yadav",
+  "license": "ISC",
+  "dependencies": {
+    "bittrex-rest-client": "^2.0.6",
+    "hs-client": "^0.0.9"
+  }
+}

@@ -1,0 +1,20 @@
+{
+    "wallet": "primary",
+    "account": "default",
+    "hsw": {
+        "port": 12039,
+        "host": "localhost",
+        "apiKey": "v3RyS3cRe7KeY01"
+    },
+    "hsd": {
+        "port": 12037,
+        "host": "remote.hsd.example.com",
+        "apiKey": "v3RyS3cRe7KeY02",
+        "ssl": false
+    },
+    "bittrex": {
+        "apiKey": "v3RyS3cRe7KeY03",
+        "apiSecret": "v3RyS3cRe7KeY04",
+        "timeout": 3000
+    }
+}

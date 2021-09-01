@@ -1,0 +1,4 @@
+config.json
+output.csv
+node_modules/
+.tern-project
