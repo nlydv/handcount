@@ -18,10 +18,10 @@ function toCSV(bank) {
             feeCurrency: entry.symbol ?? "HNS",
             costsOrProceeds: "",
             costsOrProceedsCurrency: "",
-            syncHoldings: "",
+            syncHoldings: 1,
             sentOrReceivedFrom: "",
             sentTo: "",
-            notes: ""
+            notes: entry.id
         };
 
         switch (row.type) {
@@ -51,9 +51,11 @@ function toCSV(bank) {
                 break;
             case "OTHER":
                 row.type = "TRANSFER";
+                row.baseAmount = 0.000001;
+                row.syncHoldings = "";
                 row.sentOrReceivedFrom = "MY_WALLET";
                 row.sentTo = "MY_WALLET";
-                row.baseAmount = 0.000001;
+                row.notes = "(zero-transfer/internal tx) " + entry.id;
         }
 
         let rowStr = "";

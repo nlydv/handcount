@@ -1,4 +1,5 @@
 config.json
-output.csv
+*.csv
+!delta-template.csv
 node_modules/
 .tern-project

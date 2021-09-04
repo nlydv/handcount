@@ -1,0 +1,27 @@
+∆ Delta CSV import template,,,,,,,,,,,,,,
+"This document will explain how the Delta CSV import format works, and how you should use it",,,,,,,,,,,,,,
+"When you upload the CSV file, make sure the instruction text is not present, or it will fail!",,,,,,,,,,,,,,
+A brief description of the fields:,Date,,"This field contains the date and time of the transaction, including the timezone. If you don't specify a timezone, the timezone will default to UTC (Coordinated Universal Time)",,,,,,,,,,,
+,Type,,"The type of the transaction. For trades you can specify 'BUY' or 'SELL', and for transfers you can specify 'DEPOSIT', 'WITHDRAW' or 'TRANSFER'",,,,,,,,,,,
+,Exchange,,"The exchange where the trade (or deposit/withdraw) was made. Optional for trades. When not specified, we'll use the Global Average to calculate the costs/proceeds and worth on",,,,,,,,,,,
+,Base amount,,The amount you were trading or transferring (excluding fees),,,,,,,,,,,
+,Base currency,,The currency you were trading or transferring,,,,,,,,,,,
+,Quote amount,,"For trades, the amount you were trading it for (excluding fees). It can be calculated as the price per coin * the amount of coins traded",,,,,,,,,,,
+,Quote currency,,The trade currency,,,,,,,,,,,
+,Fee,,The fee that was paid on the trade or transfer,,,,,,,,,,,
+,Fee currency,,The currency of the fee,,,,,,,,,,,
+,Costs/Proceeds,,"Optional, used for an ICO, we'll take this amount as money invested",,,,,,,,,,,
+,Costs/Proceeds currency,,"Optional, used for an ICO, the currency of the amount invested",,,,,,,,,,,
+,Sync holdings,,"Optional, for trades. When set to 1, the quote will be added to or deducted from your holdings (depending if it's a SELL or BUY). It's recommended but it can result in a negative balance if you manually entered corresponding trades/transfers.",,,,,,,,,,,
+,Sent/Received from,,"In case of an ICO, this field should be 'ICO', otherwise it's only used for transfers. You can specify the name of an exchange, 'MY_WALLET', 'OTHER_WALLET', 'BANK', 'AIRDROP', 'MINING', 'FORK', 'DIVIDENDS' or 'OTHER'",,,,,,,,,,,
+,Sent to,,"Only used for transfers. You can specify the name of an exchange, 'MY_WALLET', 'OTHER_WALLET', 'BANK' or 'OTHER'",,,,,,,,,,,
+,Notes,,Your notes you want to keep for this transaction (optional),,,,,,,,,,,
+,,,,,,,,,,,,,,
+Date,Type,Exchange,Base amount,Base currency,Quote amount,Quote currency,Fee,Fee currency,Costs/Proceeds,Costs/Proceeds currency,Sync Holdings,Sent/Received from,Sent to,Notes
+2018-01-01 20:40:00 +01:00,DEPOSIT,Coinbase,10000,EUR,,,,,,,,,,Example of fiat deposit
+2018-01-08 17:58:00 +01:00,BUY,Coinbase,2,BTC,10000,EUR,0.1,BTC,,,1,,,1.9 BTC will be added. 10000 EUR will be deducted.
+2018-01-10 18:00:00 +01:00,TRANSFER,,1.9,BTC,,,0.01,BTC,,,,Coinbase,Binance,Example of TRANSFER. Only 0.01 will be deducted.
+2018-01-25 15:05:00 +01:00,BUY,Binance,20,ETH,1,BTC,0.02,BTC,,,1,,,20 ETH will be added and 1.02 BTC deducted.
+2018-02-28 23:59:00 +01:00,SELL,Binance,10,ETH,1.05,BTC,0.5,ETH,,,1,,,10.5 ETH will be deducted and 1.05 BTC added.
+2018-03-01 18:22:00 +01:00,BUY,,50,SAM (Sample Token Name),1,ETH,,,300,EUR,1,ICO,,Example of how to add an ICO. 1 ETH will be deducted.
+2018-03-28 22:22:00 +02:00,WITHDRAW,,8.5,ETH,,,,,,,,Binance,OTHER,Example of WITHDRAW. 8.5 ETH will be deducted.
