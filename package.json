@@ -9,7 +9,9 @@
   "author": "Neel Yadav",
   "license": "ISC",
   "dependencies": {
+    "@swan-bitcoin/xpub-lib": "^0.1.0",
     "bittrex-rest-client": "^2.0.6",
+    "blockchain.info": "^2.12.1",
     "hs-client": "^0.0.9"
   }
 }
