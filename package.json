@@ -13,5 +13,8 @@
     "bittrex-rest-client": "^2.0.6",
     "blockchain.info": "^2.12.1",
     "hs-client": "^0.0.9"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0"
   }
 }
