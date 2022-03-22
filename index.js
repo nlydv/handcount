@@ -1,15 +1,30 @@
-const { toCSV } = require("./csv.js");
-const { buildWalletHistory } = require("./wallet.js");
-const { buildExchangeHistory, DECIMALS } = require("./exchange.js");
+const { buildExchangeHistory, DECIMALS } = require("./lib/exchange.js");
+const { toCSV } = require("./lib/util");
+
+const build = {
+    bitcoin: require("./lib/wallets/bitcoin.js"),
+    handshake: require("./lib/wallets/handshake.js"),
+};
+
+class Account {
+    constructor() {
+        this.balance = 0;
+        this.income = 0;
+        this.expend = 0;
+        this.burned = 0;
+        this.sumFee = 0;
+        this.numTxs = 0;
+    }
+}
 
 const bank = {
-    HNS: {
-        balance: 0,
-        income: 0,
-        expend: 0,
-        burned: 0,
-        sumFee: 0
-    }
+    // HNS: {
+    //     balance: 0,
+    //     income: 0,
+    //     expend: 0,
+    //     burned: 0,
+    //     sumFee: 0
+    // }
 };
 
 let numTxs = 0;
@@ -55,19 +70,28 @@ function reconcile(wallet, exchange) {
 /* ————————————————————————————————————————————————————————————— */
 
 async function buildPortfolio() {
-    let wallet = await buildWalletHistory();
+    const wallets = {
+        BTC: await build.bitcoin(),
+        HNS: await build.handshake()
+    };
+
     let exchange = await buildExchangeHistory();
 
-    // merge matching deposit/withdrawal txs between wallet & exchange
-    const merged = reconcile(wallet, exchange);
-    wallet.ledger = merged[0];
-    exchange.ledger = merged[1];
+    for ( const [money, acct] of Object.entries(wallets) ) {
+        let wallet = acct;
+        bank[money] = bank?.[money] ?? new Account();
 
-    // initate filling bank metrics by first copying hsw values (wallet.js)
-    wallet = Object.entries(wallet);
-    ledger = wallet.pop()[1];
-    numTxs = wallet.pop()[1];
-    wallet.forEach(value => { bank.HNS[value[0]] = value[1]; });
+        // merge matching deposit/withdrawal txs between wallet & exchange
+        const merged = reconcile(wallet, exchange);
+        wallet.ledger = merged[0];
+        exchange.ledger = merged[1];
+
+        // initate filling bank metrics by first copying hsw values (wallet.js)
+        wallet = Object.entries(wallet);
+        ledger = ledger.concat(wallet.pop()[1]);
+        numTxs += wallet.pop()[1];
+        wallet.forEach(value => { bank[money][value[0]] += value[1]; });
+    }
 
     // then extract off & merge the meta/non-iterative metrics from exchange values (exchange.js)
     exchange = Object.entries(exchange);
@@ -82,7 +106,8 @@ async function buildPortfolio() {
 
         for ( let money of monies ) {
             const i = monies.indexOf(money);
-            bank[money] = bank?.[money] ?? { balance: 0, income: 0, expend: 0, sumFee: 0 };
+            // bank[money] = bank?.[money] ?? { balance: 0, income: 0, expend: 0, sumFee: 0 };
+            bank[money] = bank?.[money] ?? new Account();
             bank[money][metric] += values[i];
         }
     }
@@ -106,5 +131,6 @@ async function buildPortfolio() {
 
 (async () => {
     const bank = await buildPortfolio();
+    // console.log(JSON.stringify(bank));
     toCSV(bank);
 })();

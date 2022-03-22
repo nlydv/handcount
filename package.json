@@ -1,20 +1,41 @@
 {
-  "name": "handcount",
-  "version": "0.1.0",
-  "description": "Tool to handle/export Handshake tx history from the wallet client (hsw) & exchanges (only Bittrex currently) for portfolio tracking purposes.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Neel Yadav",
-  "license": "ISC",
-  "dependencies": {
-    "@swan-bitcoin/xpub-lib": "^0.1.0",
-    "bittrex-rest-client": "^2.0.6",
-    "blockchain.info": "^2.12.1",
-    "hs-client": "^0.0.9"
-  },
-  "devDependencies": {
-    "eslint": "^7.32.0"
-  }
+    "name":        "handcount",
+    "version":     "0.1.0",
+    "description": "Tool to handle/export Handshake tx history from the wallet client (hsw) & exchanges (only Bittrex currently) for portfolio tracking purposes.",
+    "homepage":    "https://github.com/nlydv/handcount",
+    "bugs":        "https://github.com/nlydv/handcount/issues",
+    "license":     "UNLICENSED",
+    "repository": {
+        "type": "git",
+        "url":  "https://github.com/nlydv/handcount.git"
+    },
+    "author": {
+        "name":  "Neel Yadav",
+        "email": "mail@neelyadav.com",
+        "url":   "https://neelyadav.com/"
+    },
+
+    "main": "./index.js",
+    "dependencies": {
+        "@babel/runtime": "^7.16.3",
+        "@swan-bitcoin/xpub-lib": "^0.1.0",
+        "bignumber.js": "^9.0.1",
+        "bittrex-rest-client": "^2.0.6",
+        "blockchain.info": "^2.12.1",
+        "etherscan-api": "^10.0.5",
+        "hs-client": "^0.0.9",
+        "yaml": "^1.10.2"
+    },
+    "devDependencies": {
+        "@oipwg/hdmw": "^2.0.0",
+        "eslint": "^7.32.0"
+    },
+
+    "exports": {
+        ".": "./index.js",
+        "./opt": "./config.json",
+        "./util": "./lib/util/index.js",
+        "./data/*": "./data/*",
+        "./model": "./lib/model.js"
+    }
 }
