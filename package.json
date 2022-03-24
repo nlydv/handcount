@@ -17,9 +17,9 @@
 
     "main": "./index.js",
     "dependencies": {
-        "@babel/runtime": "^7.16.3",
-        "@swan-bitcoin/xpub-lib": "^0.1.0",
-        "bignumber.js": "^9.0.1",
+        "@babel/runtime": "^7.17.8",
+        "@swan-bitcoin/xpub-lib": "^0.1.2",
+        "bignumber.js": "^9.0.2",
         "bittrex-rest-client": "^2.0.6",
         "blockchain.info": "^2.12.1",
         "etherscan-api": "^10.0.5",
@@ -30,6 +30,7 @@
         "@oipwg/hdmw": "^2.0.0",
         "eslint": "^7.32.0"
     },
+
 
     "exports": {
         ".": "./index.js",
