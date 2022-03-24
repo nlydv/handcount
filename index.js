@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2021 Neel Yadav
+ * All rights reserved.
+ *
+ *     Tool to handle/export Handshake tx history
+ *     from the wallet client (hsw) and exchanges
+ *     (only Bittrex currently), along with other
+ *     Bitcoin wallet transactions, for portfolio
+ *     tracking purposes.
+ *
+ * Authors:    Neel Yadav <mail@neelyadav.com>
+ * Created:    August 26th, 2021
+ * Website:    https://github.com/nlydv/handcount
+ *
+ */
+
 const { buildExchangeHistory, DECIMALS } = require("./lib/exchange.js");
 const { toCSV } = require("./lib/util");
 
